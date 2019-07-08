@@ -1,0 +1,390 @@
+--employees 테이블로부터 아이디를 조회하는 질의문<이렇게 주석처리할 수 있음.
+SELECT *
+FROM employees;
+SELECT employee_id, last_name, first_name
+FROM employees;
+
+/*
+노트의 내용.....
+....
+...
+*/
+
+
+
+--급여순으로 직원의 이름과 급여를 검색하시오.
+↓이런 식으로 구성 가능.
+
+SELECT last_name, salary
+FROM employees
+ORDER BY salary;
+
+중복을 제거해줄 수 있는 DISTINCT 구문.
+SELECT employee_id, job_id
+FROM employees
+WHERE last_name LIKE 'K%';
+
+
+SELECT employee_id, job_id
+FROM employees
+WHERE last_name LIKE '_a%';
+
+가령 주소지가 흥덕구, 서원구에 해당하는 사람을 뽑고 싶을 때 where 주소가 흥덕구 or 주소가 서원구 로 두개의 조건 중에 하나만 해당하면 나오게 하는.. 이럴 때 IN이 유용하게 쓰임. 
+
+
+
+SELECT employee_id, last_name, department_id, salary
+FROM employees
+ORDER BY department_id, salary DESC, last_name;
+
+
+ROLLBACK;
+DELETE문을 사용해 삭제한 후 롤백으로 데이터 복구가 가능하다. 
+TRUNCATE를 사용해 데이터를 지우면 빠르게 삭제되나, 복구가 되지 않는다.
+
+
+Descending 내림차순
+Ascending 오름차순
+
+
+sysdate 현재 시스템상의 날짜와 시간을 반영가능할 수 있도록 하는 함수.
+
+HAVING 절은 그룹에 대한 제한을 두고자 할 경우에 사용함.
+그룹함수와 함께 사용.
+GROUP BY  뒤에다가 적용.
+
+
+GROUP BY 절
+FROM절과 WHERE 절 뒤에 오며, 데이터들을 작은 그룹으로 분류하여 소그룹에 대한 항목별로 통계정보를 얻을 때 추가로 사용함. GROUP 절과 HAVING절의 특성
+n GROUP BY 절을 통해 소그룹별 기준을 정한 후, SELECT 절에 집계 함수 사용한다.
+집계 함수의 통계 정보는 NULL값을 가진 행을 제외하고 수행한다.
+GROUP BY 절에서는 SELECT 절과 달리 ALIAS 명을 사용할 수 없다.
+집계함수는 WHERE절에는 올 수 없다. (GROUP BY 절보다 WHERE 절이 먼저 수행된다.)
+WHERE절은 전체 데이터를 GROUP으로 나누기 전에 행들을 미리 제거한다.
+HAVING절은 GROUP BY 절의 기준 항목이나 소그룹의 집계 함수를 이용한 조건을 표시할 수 있다.
+GROUP BY 절에 의한 소그룹별로 만들어진 집계 데이터 중, HAVING절에서 제한 조건을 두어 조건을 만족하는 내용만 출력.
+HAVING절은 일반적으로 GROUP BY 절 뒤에 위치한다. 
+HAVING절은 GROUP BY 절의 결과 나타나는 그룹을 제한하는 역할을 한다. 
+
+
+SELECT [ALL/DISTINCT] [COLUMNLIST]
+FROM TABLE_NUM
+[WHERE EXPRESSION]
+[ORDER BY 속성[ASC/DESC]]
+[GROUP BY 속성]
+[HAVING EXPRESSION]
+
+JOIN 조인
+
+EQUI JOIN
+left join, right join
+
+CROSS JOIN 
+-m x n
+속성 명이 같고 도메인이 같은 것을 지정해줌.
+
+왼쪽에 있는 테이블을 포함시킬 때는 left 조인
+오른쪽에 있는 테이블을 포함시킬 때는 right 조인
+
+각각 다른 세개의 테이블을 결합시켜서 조건 외의 검색 조건을 추가해보기.
+
+표준 join 
+oracle 뿐만 아니라 다른 프로그램에서도 구동 가능한 구문
+
+A테이블과 B테이블이 있는 경우 공통된 값을 테이블에 도출 시킨 뒤 왼쪽에 있는 테이블은 무조건 도출시키려면 LEFT JOIN. 반대의 경우엔 RIGHT JOIN.
+
+
+--
+아름이가 알려준 조인에 대한 개념
+--
+
+쿼리문이해부터
+select * 
+from 테이블
+where 컬럼 = '1';
+
+테이블로부터(from 테이블) 컬럼이 '1'인 값을(where 조건) 조회(select)
+
+join 두개이상의 테이블을 결합
+ex )
+1.회원정보테이블 TB_USER
+아이디,비밀번호,닉네임,이름,성별,전화번호
+2.게시판테이블 TB_BBS
+게시번호,작성자아이디(아이디),제목,내용
+
+join방법이 두가지가 있는데
+from절에 이어서 쓰는거랑 
+join on으로 하는게 있어
+
+SELECT A.아이디,닉네임,게시번호,제목
+FROM TB_USER A, TB_BBS B
+WHERE A.아이디 = B.작성자아이디
+AND A.닉네임 = '달리';
+
+요렇게 하면 닉네임이 달리인 사람의 아이디,닉네임,게시물을 같이 조회할 수가 있는거지
+
+SELECT A.아이디,닉네임,게시번호,제목
+FROM TB_USER A
+JOIN TB_BBS B
+ON A.아이디 = B.작성자아이디
+WHERE A.닉네임 = '달리';
+
+--------------------------------------
+equi join
+outer join(left, right)에 대한 개념만 가져가면 됨.
+공통된 결과값만 반영하는 것이 equi join
+그러나 여기엔 있지만 저기엔 없는 것도 전체 반영해야할 때가 있음.
+그럴 때 가져올 수 있는 것을 outer join (왼쪽에 있는 것을 기준으로 가져오고 싶을 때 left join, 오른쪽을 기준으로 가져올 때
+right)
+
+서브쿼리가 조인과 같은 역할을 할 수 있음(물론 경우에 따라서 적용이 안될 수도 있으나..)
+서브쿼리는 반드시 괄호에 감싸서 수행되어야 함.
+서브쿼리는 비교 연산자의 우측에 위치
+
+select max
+from employees
+
+급여 < ANY(100,200,300)
+any는 <,,,이중에 하나라도>라는 뜻.
+최종적인 결과는 이중에서 제일 큰 값보다 작은
+
+급여 < ALL (100,200,300)
+급여가 110인 경우, 100은 해당이 안됨.
+괄호 안에 포함된 값들 보다도 작은.
+
+alter, modified, drop
+
+selection, projection
+
+=
+
+중복되는 것도 보이고 싶을 때 *
+따로 DISTINCT 쓰면 중복되는 것을 제거할 수 있음.
+일시적으로 사용됨. 효용이 별로 없음. 카티전 프로덕트.
+==
+!=
+<>
+테이블이 들어가는 공간을 확보해야함.
+보통은 시스템 영역임.
+테이블 스페이스.
+우리가 만드는 테이블 스페이스에 할당이 되게끔 파일이 들어가도록 할거임.
+관리자 영역을 실습할 것임.
+
+create tablespace 테이블스페이스 이름
+--data '데이터파일경로'
+size초기사이즈
+autoextend on next 자동증가사이즈
+maxsize 최대사이즈;
+
+create tablespace madang javadb datafile ' d:\honggildong\madang.dbf'
+size 50M
+autoextend on next 10M maxsize unlimited;
+
+로그인이 안될 때-
+
+cmd창 열고 sqlplus/ as sysdba
+alter user system identified by 1234;
+
+
+CREATE TABLESPACE
+DROP TABLESPACE 이름;
+이렇게 하면 삭제가 됨. 물리적으로 다시 지우고 
+
+
+-사용자계정 만들기
+create user 아이디 identified by 비밀번호
+default tablespace 테이블스페이스이름;
+
+--권한 부여하기
+
+grant 권한 to 아이디;
+참고.
+connect : 로그인 권한
+resource : 자원을 사용할 수 있는 권한 
+dba : db 관리자 권한
+
+--테이블 생성하기
+
+create table syntax:
+CREATE TABLE schema_name(생략해도 됨).table_name (
+column_1 data_type column_constraint,(< 컬럼 단위로 주어지는 제약조건)
+column_2 data_type coumn_constraint,
+...
+);
+
+
+create table syntax:
+CREATE TABLE table_name (
+column_1 data_type 
+column_2 data_type 
+...
+);
+
+CREATE TABLE book(
+    Bookid number not null, 
+    bookname, varchar2(50) not null,
+    publisher varchar2(10) not null,
+    price number
+    primary key(bookid)
+
+);
+
+constraint : 제약조건
+
+ex) null값을 허용하면 안됨
+primary key는 일반적인 속성을 다 정해준 후 써주는 편
+
+
+책의 제목은 공백이 있어선 안됨.
+
+
+Book(bookid, bookname, publisher, price)
+
+
+DELETE FROM book;
+WHERE bookid = 2;
+특정한 조건을 이렇게 줘야만 원하는 것을 삭제가능.
+제약을 걸어줘야 함.
+특정한 레코드에 대해서만. where 사용.
+
+rollback, 
+commit에 대한 개념
+varchar2
+
+book(bookid, bookname, publisher,price)
+customer(custid, name, address, phone)
+orders(orderid, custid, bookid,saleprice,orderdate)
+
+CREATE TABLE...(
+주키속성명,
+.....,
+외래키속성명,
+.....,
+PRIMARY KEY(주키속성명),
+FOREIGN KEY 외래키속성명 REFERENCES 테이블이름(속성이름)
+
+CREATE TABLE orders(
+....
+custid number(3),
+.....
+FOREIGN KEY custid REFERENCES customer(custid),
+);
+
+
+물리적 독립성,
+논리적 독립성
+데이터베이스의 독립성의 개념
+3계층 구조.
+매핑이 있고 각 단계 간 대응 관계를 정의.
+중복의 최소화는 가능함. 
+아노말리, abnormal를 제거하고 무결성 상태를 만드는 것. 
+자료를 삽입하면서 생기는 문제들, 업데이트할 때 생길 수 있는 문제들을
+우리가 데이터를 정의하면서 정리를 해줘야 함.
+인서트할 때 문제가 생기면 ~ 해라 < 제약조건(constraint)
+
+INSERT 구문 
+
+Primary키는 null값을 허용하지 않음.
+unique는 null값을 허용함.
+ON DELETE CASCADE->참조 된 것까지 다같이 삭제
+
+부속질의
+보통 부속질의라고 하면 WHERE 부속질의를 말한다. 부속질의들 간에 구분이 필요할 때 WHERE 부속질의를 중첩질의라고 부르기도 한다.
+
+부속질의의 종류
+
+스칼라 부속질의
+SELECT절에서 사용되는 부속질의로, 부속질의의 결과 값을 단일 행, 단일 열의 스칼라 값으로 반환한다. 만약 결과 값이 다중 행이거나
+다중 열이라면 DBMS는 그 중 어떤 행, 어떤 열을 출력해야 하는지 알 수 없어서 에러를 출력한다.
+결과가 없는 경우에는 NULL을 출력함. 일반적으로 SELECT, UPDATE SET절에 사용된다. 
+
+하나의 SQL 문 안에 다른 SQL문이 중첩된 질의를 말함.
+다른 테이블에서 가져온 데이터로 현재 테이블에 있는 정보를 찾거나 가공할 때 사용한다.
+보통 데이터가 대량일 때 데이터를 모두 합쳐서 연산하는 조인보다
+필요한 데이터만 찾아서 공급해주는 부속질의가 성능이 더 좋다.
+주질의(main query, 외부질의)와 부속질의(sub query, 내부 질의)로 구성된다.
+
+인라인 뷰
+FROM절에서 결과를 뷰(view)형태로 반환하기 때문에 인라인 뷰라고 한다.
+
+중첩질의
+WHERE절에 술어와 같이 사용되며 결과를 한정 시키기 위해 사용된다. 상관 혹은 비상관 형태이다.
+
+조인을 사용할 경우 
+: customer테이블과 orders테이블의 고객번호로 조인을 한 후, 필요한 데이터를 추출하는 방식.
+
+부속질의를 사용할 경우
+: customer 테이블에서 박지성 고객의 고객번호를 찾고, 찾은 고객번호를 바탕으로 orders 테이블에서 확인한다. 
+
+IN은 NULL값을 가져올 수 없다. EXISTS는 NULL값을 가져올 수 있음.
+
+EXISTS에 대한 개념↓
+
+SELECT name, address
+FROM customer cs
+WHERE EXISTS (SELECT *
+	        FROM orders od
+	        WHERE cs.custid=od.custid);
+
+이 구문에 나오는 서브쿼리(괄호 안에 있는 구문에 해당)를 추출하는 것.
+만약 서브쿼리를 제외한 나머지 데이터를 추출하고 싶다면 not exists를 쓰면 된다.
+in도 마찬가지. not in을 써주면 된다.
+
+ORDER BY절과 GROUP BY절이 헷갈린다.
+다시 정리를 한다.
+
+ON절과 WHERE절
+
+WHERE절은 조건에 맞는 검색을 할 때 사용한다. 부속질의(중첩질의)에서도 사용됨. 
+조건으로 사용할 수 있는 술어 는 비교, 범위, 집합, 패턴, NULL로 구분할 수 있다.
+
+
+ORDER BY절과 
+GROUP BY절의 차이
+두 개의 절은 비슷한 느낌이 있어서 혼동되기 쉬우나, 
+엄연히 다른 역할을 수행하고 있기 때문에 다르다.
+우선, ORDER BY절은 어떠한 조회된 결과의 데이터물을 일목요연하게 정리하고 싶을 때,
+원하는 필드를 기준으로 정렬하여 보기 좋게 출력하는데 사용하는 절이다.
+한마디로 말해서 데이터를 검색해서 조회해서 봐야할 때.
+
+GROUP BY절은 
+데이터들을 작은 그룹으로 분류하여 그룹에 대한 항목별로 통계적인 정보를 얻고자 하는데 
+사용된다. 이를테면, A테이블이 있을 때 샐러리(컬럼)가 30인 사람들의 그룹을 오름차순 정렬로
+추출할 수 있다. 또한 GROUP BY절에서는 ALIAS명을 사용할 수 없다.
+HAVING절에 제한 조건을 두어서 그룹에 대해서 조건을 만족하는 내용만 출력할 수 있고
+HAVING절은 일반적으로 GROUP BY절에 위치해서 사용된다.
+
+그러니까 쉽게 말해 GROUP BY절도 조회된 자료를 정리할 때 쓰인다. 
+그런데 운영자의 입장에서 데이터를 조회해서 어떤 데이터를 집계해서 합계까지 봐야할 때(?)
+집계 함수에 GROUP BY를 사용하는 이유가 그것이다. 판매량이나, 판매품목을 집계해야할 때라든지...
+그럴때 사용하는 것이다. 
+
+ORDER BY절은 칼럼명 대신에 위에서 사용한 ALIAS명도 사용가능하다.
+정렬방식을 지정하지 않으면 일반적으로 오름차순으로 정렬되며,
+NULL값은 오름차순으로 정렬했을 경우에는 가장 마지막에,
+내림차순으로 정렬했을 경우에는 맨 앞에 온다.
+
+SQL문의 수행 단계는 아래와 같다.
+-발췌 대상 테이블을 참조한다. (FROM)
+-발췌 대상 데이터가 아닌 것은 제거한다. (WHERE)
+-행들을 그룹화합니다.(GROUP BY -> GROUPPING)
+-그룹함수의 값의 조건에 맞는 것만을 출력한다(HAVING)
+-데이터 값을 계산한다(SELECT)
+-데이터를 특정 칼럼을 기준으로 정렬한다.(ORDER BY)
+
+
+ 
+
+WHERE절과 ON절에 대해 
+우선 ON절은 조인 구문에서만 사용된다.
+
+JOIN
+조인은 그냥 간단히 말해서 테이블과 다른 테이블의 행들을 연결해서 두 개이상의 테이블을 
+결합하는 것을 말한다.
+조건이 없는 테이블 간의 조인은 카티전 프로덕트라고 한다. 
+
+
+ 
+
+
+
