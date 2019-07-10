@@ -384,7 +384,50 @@ JOIN
 조건이 없는 테이블 간의 조인은 카티전 프로덕트라고 한다. 
 
 
+MY SQL
+워크벤치를 사용함.
 
+show databases;
+
+use world;
+
+show tables;
+
+desc city;
+
+
+SELECT * FROM city WHERE POPULATION >=1000000
+ORDER BY POPULATION DESC;
+
+null -> no(null값을 허용하지 않는다는 의미)
+
+USE WORLD;
+
+SHOW TABLES;
+
+DESC COUNTRY;
+DESC COUNTRYLANGUAGE;
+
+%-> 위험에 노출될 가능성도 높음.
+LOCAL HOST
+
+mysql에서는 데이터베이스라는 말 대신에 schema라는 말을 씀.
+MYsql에서는 데이터베이스가 여러개임.
+만들 때 어느 데이터베이스에서 만드는지 테이블을 만들 때 지정해줘야함.
+아니면 기본 db를 use. madang이렇게 열어놓고 그 안에서 create table하면 이 안에서 만들 수 있음.
+
+show databases;
+
+use madang;
+
+show tables;
+
+CREATE TABLE 
+
+https://www.oracletutorial.org/
+http://www.mysqltutorial.org/
+http://www.mysqltutorial.org/basic-mysql-tutorial.aspx
+https://www.oracletutorial.org/examples/joins/inner-join.php
 
  
 
