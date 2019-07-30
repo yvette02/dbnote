@@ -1,0 +1,92 @@
+ctrl+shift+P = 단축키 모음.
+
+java
+window-perspective-other-web
+
+오른쪽버튼->new-project-dynamic web project
+
+apache tomcat을 설치해서 html을 올려서 볼 수 있음.
+
+
+이클립스에 아파치톰캣을 연결시켜야 함.
+java
+window-preferences-runtime#$#$-server-9.0
+
+연동은 코드를 통해서 함. 
+
+webcontent 오른쪽 버튼 클릭 ->htmlfile-> index.html 파일 만들기
+
+기본적인 틀만 갖춰놓고 한줄한줄 번역(html 인터프리터의 특징)
+c,java같은 컴파일은 전체적인 코드가 만들어져야 번역됨.
+태그 기반, 소문자로 써야함.
+그래야 어떤 브라우저든 다 번역됨.
+여는 태그와 닫는 태그를 정확히 입력.
+들여쓰기가 중요함(자바의 중괄호와 같은 의미가 파이썬. 파이썬은 들여쓰기가 아주 중요함. html은 적당히 들여써주면 됨.)
+
+<html></html>
+<head>사이에 문서 정보가 들어가고
+<body>에는 실제 화면 내용이 들어감. 
+
+인코딩을 잘 맞춰줘야 함. 
+우리가 만드는 페이지의 인코딩과 화면에 구현되는 인코딩이 잘 맞춰져야 함. utf-8이라는 형식
+
+화면 하단에 servers를 클릭한 다음 링크되어 있는 글자를 클릭-> finish
+
+그 뒤에 그 문자 오른쪽 마우스로 클릭 ->start 클릭.
+
+http://myblog.opendocs.co.kr/archives/1702
+
+http://192.168.0.78:8080/webbasic/index.html
+도메인 호스팅업체에 의뢰하면 한달에 정해진 금액을 내고 도메인 주소를 이용할 수 있음.
+tcp : 프로그램 안에서 돌아가는 프로세스. 포트(논리적인 의미. 프로그램의 유일한 번호)
+ftp: 23번, 24번 port 프로그램 접속 논리적인 통로라고 생각하면 됨.
+
+
+dothome.co.kr
+프로그램
+1. 서버접속
+2. id/pw
+
+blockqoute->들여써주는 기능.
+
+SVG파일 형식이란->벡터방식
+
+포트 종료하기 
+
+관리자권한으로 cmd 실행시켜야함.
+netstat -a -n -o
+-> taskkill /f /pid 피드번호
+
+--주석처리
+
+절대경로<"img src="img/spring.jpg">
+상대경로<·····/img/spring.jpg>
+절대경로는 파일의 경로를 모두 쓰는 것이고, 
+상대경로는 어떤 파일을 기준으로 다른 파일의 경로를 쓰는 것
+
+이미지 파일
+bitmap : Gif, jpg, png 픽셀 단위, 계단 현상.
+rgb red,green,blue이 세 가지 색으로 구성됨. JPG의 경우가 그런 예.
+
+
+ul> 순서없는 단락. 
+get방식
+post방식.
+
+html example => 표만들기, 목록 만들기,
+day02 이미지맵.  앵커기능 
+example 앵커기능 사용하여... day 01, day02, day03, day04목록.. 하이퍼링크 달기.  
+
+form 구역에 
+로그인을 위한 폼.
+회원가입을 위한 폼. 
+방명록 기능 만들기
+
+
+hidden방식 request할 땐 보내지는 방식.
+
+get 방식. 
+입력했을 때 search.php? id:family8 pw:xxxx 그 값을 웹서버로 전달.
+
+홈페이지 마진 공간 없애기. 
+post방식. 키값으로 설정 보이지 않은 채로 전송됨. 

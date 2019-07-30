@@ -1,0 +1,49 @@
+﻿<!doctype html>
+<html lang = "ko">
+	<head>
+	<meta charset = "utf-8">
+	</head>
+
+	<body>
+<p>
+<title>한다혜</title>
+<blockquote>
+<h2>인생이란 누구나 한 번쯤 시도해 볼 만한 것이다. Life is something that everyone should try at least once. </h2>
+<br>- Henry J. Tilman
+</blockquote>
+<img src ="img/life.jpg">
+<table border = 2>
+<colgroup>
+	<col style = "width: 100px;">
+	<col style = "width: 100px;">
+	<col style = "width: 100px;">
+	<col style = "width: 100px;">
+</colgroup>
+<caption>
+<span style="color:#8E83A9">한다혜 프로필</span>
+</caption>
+<tr>
+	<th>이름</th>
+	<td>한다혜</td>
+	<td>연락처</td>
+	<td>01075792715</td>
+
+</tr>
+<tr>
+	<th>주소</th>
+	<td colspan="3">충북 청주시 산남동</td>
+	
+</tr>
+<tr>
+	<th>자기소개</th>
+	<td colspan="3">개발자가 꼭 되고 싶어요</td>
+</tr>	
+
+</table>
+<h2>자주 가는 링크 
+<li>오키</li>
+	<figure>
+	<a href="https://okky.kr" target = "_blank">
+	</figure	
+</body>
+</html>
